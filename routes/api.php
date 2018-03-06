@@ -27,3 +27,20 @@ Route::post('recover', 'AuthController@recover');
 Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('logout', 'AuthController@logout');
 });
+
+Route::get('measurements/{user_id}/{name?}', function($user_id, $name = null) {
+	$measurements = App\Measurement::getMeasurement($user_id, $name)->get();
+    return $measurements;
+});
+Route::get('measurements', function() {
+	$measurements = App\Measurement::all();
+    return $measurements;
+});
+Route::get('measurement_metas', function() {
+	$measurement_meta = App\MeasurementMeta::all();
+    return $measurement_meta;
+});
+Route::get('units', function() {
+	$units = App\Unit::all();
+    return $units;
+});
