@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -27,7 +26,11 @@ Route::post('recover', 'AuthController@recover');
 Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('logout', 'AuthController@logout');
 });
-
+/*
+|--------------------------------------------------------------------------
+| API Routes: measurements, measurement_metas, units
+|--------------------------------------------------------------------------
+*/
 Route::get('measurements/{user_id}/{name?}', function($user_id, $name = null) {
 	$measurements = App\Measurement::getMeasurement($user_id, $name)->get();
     return $measurements;

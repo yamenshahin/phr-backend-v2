@@ -49,4 +49,11 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    /**
+     * Relationship with measurement
+     */
+    public function measurement()
+    {
+        return $this->hasMany(Measurement::class);
+    }
 }

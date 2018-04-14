@@ -6,7 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Measurement extends Model
 {
-    public function measurement_metas() {
+    /**
+     * Relationship with user
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    /**
+     * Relationship with measurement_meta
+     */
+    public function measurement_meta() {
         return $this->hasMany(MeasurementMeta::class);
     }
     public function scopeGetMeasurement($query, $user_id, $name = null) {
