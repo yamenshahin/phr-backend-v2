@@ -8,16 +8,15 @@ use Illuminate\Support\Facades\DB;
 class Measurement extends Model
 {
     /**
-     * Relationship with user
+     * Relationship with subuser
      */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+    public function subuser() {
+        return $this->belongsTo(Subuser::class);
     }
     /**
      * Relationship with measurement_meta
      */
-    public function measurement_meta() {
+    public function measurementMeta() {
         return $this->hasMany(MeasurementMeta::class);
     }
     /**
