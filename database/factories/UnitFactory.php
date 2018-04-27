@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 //FIXME
 $factory->define(App\Unit::class, function (Faker $faker) {
-	$uints = array('mg/dl',
+	/*$uints = array('mg/dl',
 					'mmol/L',
 					'mmHg',
 					'beats per minute',
@@ -15,9 +15,10 @@ $factory->define(App\Unit::class, function (Faker $faker) {
 					'liters',
 					'lbs',
 					'kg'
-				);
+				);*/
 	return [
-		'unit' => $uints[$i];
+		// 'unit' => $uints[$i];
 	];
-    
 });
+
+
