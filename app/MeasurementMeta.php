@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class MeasurementMeta extends Model
 {
+    //FIX Laravel:Unknown column 'updated_at'
+    public $timestamps = false;
 	/**
      * Relationship with measurement
      */
