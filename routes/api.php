@@ -31,8 +31,8 @@ Route::group(['middleware' => ['jwt.auth']], function() {
 | API Routes: measurements, measurement_metas, units
 |--------------------------------------------------------------------------
 */
-Route::get('measurements/{user_id}/{name?}', function($user_id, $name = null) {
-	$measurements = App\Measurement::getMeasurement($user_id, $name)->get();
+Route::get('measurements/{subuser_id}/{name?}', function($subuser_id, $name = null) {
+	$measurements = App\Measurement::getMeasurement($subuser_id, $name)->get();
     return $measurements;
 });
 Route::get('measurements', function() {
