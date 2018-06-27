@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'api',
         'passwords' => 'users',
     ],
 
@@ -32,7 +32,7 @@ return [
     | mechanisms used by this application to persist your user's data.
     |
     | Supported: "session", "token"
-    |
+    | Add supported: "jwt"
     */
 
     'guards' => [
@@ -42,7 +42,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],
