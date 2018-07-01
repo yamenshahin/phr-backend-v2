@@ -35,6 +35,11 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    /**
+     * Sign up then login
+     * @param SignUpRequest $request
+     * @return login object
+     */
     public function signup(SignUpRequest $request)
     {
         //Create the new user
