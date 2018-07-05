@@ -105,4 +105,10 @@ class AuthController extends Controller
     {   
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function get_subuser_ids() {
+        $user = auth()->user();
+        $subuser_ids = User::find($user['id'])->subuser;
+        return $subuser_ids;
+    }
 }

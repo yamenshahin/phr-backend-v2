@@ -23,7 +23,9 @@ Route::group([
     Route::post('signup', 'AuthController@signup');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
+    // http://127.0.0.1:8000/api/me?token=
     Route::post('me', 'AuthController@me');
+    Route::post('get_subuser_ids', 'AuthController@get_subuser_ids');
 
 });
 /*
