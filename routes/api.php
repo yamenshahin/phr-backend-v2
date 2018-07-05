@@ -25,7 +25,7 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     // http://127.0.0.1:8000/api/me?token=
     Route::post('me', 'AuthController@me');
-    Route::post('get_subuser_ids', 'AuthController@get_subuser_ids');
+    Route::post('getSubuser', 'AuthController@getSubuser');
 
 });
 /*

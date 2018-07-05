@@ -107,10 +107,10 @@ class AuthController extends Controller
     }
 
     /**
-     * 
+     * Get sub subuser(s) based on current user id
      * @return JSON subuser(s)
      */
-    public function get_subuser_ids() {
+    public function getSubuser() {
         $user = auth()->user();
         $subuser = User::find($user['id'])->subuser;
         return $subuser;
