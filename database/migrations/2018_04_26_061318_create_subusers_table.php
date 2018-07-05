@@ -16,6 +16,9 @@ class CreateSubusersTable extends Migration
         Schema::create('subusers', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
+            $table->string('name');
+            $table->string('gender');
+            $table->date('birthdate');
             $table->timestamps();
         });
     }
