@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 |--------------------------------------------------------------------------
 | API Routes: all authentication 
 |--------------------------------------------------------------------------
+| API Routes: measurements 
+|--------------------------------------------------------------------------
 */
 Route::group([
 
@@ -26,26 +28,6 @@ Route::group([
     // http://127.0.0.1:8000/api/me?token=
     Route::post('me', 'AuthController@me');
     Route::post('getSubuser', 'AuthController@getSubuser');
+    Route::post('measurements/{subuser_id}/{name?}', 'AuthController@measurements');
 
-});
-/*
-|--------------------------------------------------------------------------
-| API Routes: measurements, measurement_metas, units
-|--------------------------------------------------------------------------
-*/
-Route::get('measurements/{subuser_id}/{name?}', function($subuser_id, $name = null) {
-	$measurements = App\Measurement::getMeasurement($subuser_id, $name)->get();
-    return $measurements;
-});
-Route::get('measurements', function() {
-	$measurements = App\Measurement::all();
-    return $measurements;
-});
-Route::get('measurement_metas', function() {
-	$measurement_meta = App\MeasurementMeta::all();
-    return $measurement_meta;
-});
-Route::get('units', function() {
-	$units = App\Unit::all();
-    return $units;
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Measurement;
 use App\Http\Requests\SignUpRequest;
 
 class AuthController extends Controller
@@ -114,5 +115,10 @@ class AuthController extends Controller
         $user = auth()->user();
         $subuser = User::find($user['id'])->subuser;
         return $subuser;
+    }
+
+    public function measurements($subuser_id, $name = null) {
+        $measurements = Measurement::getMeasurement($subuser_id, $name)->get();
+        return $measurements;
     }
 }
