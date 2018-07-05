@@ -20,9 +20,9 @@ class Measurement extends Model
         return $this->hasMany(MeasurementMeta::class);
     }
     /**
-     * For API measurements, measurements/{user_id}/{subuser_id}, measurements/{user_id}/{user_id}/{subuser_id}/{measurement_name} 
+     * For API measurements, measurements/{subuser_id}, measurements/{user_id}/{user_id}/{subuser_id}/{measurement_name} 
      */
-    public function scopeGetMeasurement($query, $user_id, $subuser_id, $name = null) {
+    public function scopeGetMeasurement($query, $subuser_id, $name = null) {
     	if ($name !== null) {
     		$measurements = $query->select(DB::raw('measurement_id, name, measurement_metas.key, measurement_metas.value, unit, note, date_taken, created_at, updated_at, unit_id'))->where('subuser_id', $subuser_id)
     			->where('name', $name)

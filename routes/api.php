@@ -29,5 +29,4 @@ Route::group([
     Route::post('me', 'AuthController@me');
     Route::post('getSubuser', 'AuthController@getSubuser');
     Route::post('measurements/{subuser_id}/{name?}', 'AuthController@measurements');
-
 });
