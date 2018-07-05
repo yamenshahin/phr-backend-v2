@@ -106,9 +106,13 @@ class AuthController extends Controller
         $this->attributes['password'] = bcrypt($value);
     }
 
+    /**
+     * 
+     * @return JSON subuser(s)
+     */
     public function get_subuser_ids() {
         $user = auth()->user();
-        $subuser_ids = User::find($user['id'])->subuser;
-        return $subuser_ids;
+        $subuser = User::find($user['id'])->subuser;
+        return $subuser;
     }
 }
