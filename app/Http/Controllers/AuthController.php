@@ -133,8 +133,12 @@ class AuthController extends Controller
         $newSubuser->save();
         return response()->json(['message' => 'Child has been added successfully']);
     }
-    public function measurements($subuser_id, $name = null) {
-        $measurements = Measurement::getMeasurement($subuser_id, $name)->get();
+    
+
+    public function getMeasurements() {
+        $user = auth()->user();
+        $subuser = Subuser::where('user_id' ,$user['id'])->pluck('id')->toArray();
+        $measurements = Measurement::whereIn('subuser_id', $subuser)->orderBy('created_at', 'desc')->get();
         return $measurements;
     }
 }
