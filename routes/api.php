@@ -28,5 +28,6 @@ Route::group([
     // http://127.0.0.1:8000/api/me?token=
     Route::post('me', 'AuthController@me');
     Route::post('getSubuser', 'AuthController@getSubuser');
+    Route::post('addSubuser', 'AuthController@addSubuser');
     Route::post('measurements/{subuser_id}/{name?}', 'AuthController@measurements');
 });

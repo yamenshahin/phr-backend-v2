@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Subuser;
 use App\Measurement;
 use App\Http\Requests\SignUpRequest;
 
@@ -28,7 +29,6 @@ class AuthController extends Controller
     public function login()
     {
         $credentials = request(['email', 'password']);
-
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Email or password is incorrect!'], 401);
         }
@@ -117,6 +117,17 @@ class AuthController extends Controller
         return $subuser;
     }
 
+    public function addSubuser() {
+        $user = auth()->user();
+        $subuser = request(['name', 'gender', 'birthdate']);
+        $newSubuser = new Subuser;
+        $newSubuser->user_id = $user['id'];
+        $newSubuser->name = $subuser['name'];
+        $newSubuser->gender = $subuser['gender'];
+        $newSubuser->birthdate = $subuser['birthdate'];
+        $newSubuser->save();
+        return response()->json(['message' => 'Child has been added successfully']);
+    }
     public function measurements($subuser_id, $name = null) {
         $measurements = Measurement::getMeasurement($subuser_id, $name)->get();
         return $measurements;
