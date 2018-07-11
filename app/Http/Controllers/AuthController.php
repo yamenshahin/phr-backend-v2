@@ -117,6 +117,11 @@ class AuthController extends Controller
         return $subuser;
     }
 
+    /**
+     * Add subuser
+     *
+     * @return JSON message
+     */
     public function addSubuser() {
         $user = auth()->user();
         $subuser = request(['name', 'gender', 'birthdate']);
