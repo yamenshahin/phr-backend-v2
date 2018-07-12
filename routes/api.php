@@ -30,4 +30,5 @@ Route::group([
     Route::post('getSubuser', 'AuthController@getSubuser');
     Route::post('addSubuser', 'AuthController@addSubuser');
     Route::get('getMeasurements', 'AuthController@getMeasurements');
+    Route::get('getMeasurements/{name?}', 'AuthController@getMeasurementsWithName');
 });

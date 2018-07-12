@@ -145,4 +145,14 @@ class AuthController extends Controller
         $measurements = Measurement::getMeasurement($subuser)->get();
         return $measurements;
     }
+
+    public function getMeasurementsWithName($request) {
+        $user = auth()->user();
+        // Temporary get only the 1st subuser
+        //$subuser = Subuser::where('user_id' ,$user['id'])->pluck('id')->toArray();
+        //$measurements = Measurement::whereIn('subuser_id', $subuser)->orderBy('created_at', 'desc')->get();
+        $subuser = Subuser::Where('user_id', $user['id'])->value('id');
+        $measurements = Measurement::getMeasurement($subuser, $request)->get();
+        return $measurements;
+    }
 }
