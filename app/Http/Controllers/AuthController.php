@@ -8,6 +8,7 @@ use App\User;
 use App\Subuser;
 use App\Measurement;
 use App\Http\Requests\SignUpRequest;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -141,7 +142,7 @@ class AuthController extends Controller
         //$subuser = Subuser::where('user_id' ,$user['id'])->pluck('id')->toArray();
         //$measurements = Measurement::whereIn('subuser_id', $subuser)->orderBy('created_at', 'desc')->get();
         $subuser = Subuser::Where('user_id', $user['id'])->value('id');
-        $measurements = Measurement::where('subuser_id', $subuser)->orderBy('created_at', 'desc')->get();
+        $measurements = Measurement::getMeasurement($subuser)->get();
         return $measurements;
     }
 }

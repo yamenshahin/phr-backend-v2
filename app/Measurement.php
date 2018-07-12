@@ -32,7 +32,8 @@ class Measurement extends Model
     	} else {
     		$measurements = $query->select(DB::raw('measurement_id, name, measurement_metas.key, measurement_metas.value, unit, note, date_taken, created_at, updated_at, unit_id'))->where('subuser_id', $subuser_id)
     			->join('measurement_metas', 'measurements.id', '=', 'measurement_metas.measurement_id')
-    			->join('units', 'measurement_metas.unit_id', '=', 'units.id');
+                ->join('units', 'measurement_metas.unit_id', '=', 'units.id')
+                ->orderBy('measurement_id');
     	}
 
     	
