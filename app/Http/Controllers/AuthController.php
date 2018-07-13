@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Subuser;
 use App\Measurement;
+use App\MeasurementMeta;
 use App\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\DB;
 
@@ -151,8 +152,26 @@ class AuthController extends Controller
         // Temporary get only the 1st subuser
         //$subuser = Subuser::where('user_id' ,$user['id'])->pluck('id')->toArray();
         //$measurements = Measurement::whereIn('subuser_id', $subuser)->orderBy('created_at', 'desc')->get();
+        return $request;
         $subuser = Subuser::Where('user_id', $user['id'])->value('id');
         $measurements = Measurement::getMeasurement($subuser, $request)->get();
         return $measurements;
+    }
+
+    public function addMeasurementsWithName() {
+        $user = auth()->user();
+        $request = request(['subuser_id', 'measurement_name', 'date_taken', 'note', 'key', 'value', 'unit_id']);
+        return $request;
+        $newMeasurement = new Measurement;
+        $newMeasurement->subuser_id = $request['subuser_id'];
+        $newMeasurement->measurement_name = $request['measurement_name'];
+        $newMeasurement->date_taken = $request['date_taken'];
+        $newMeasurement->note = $request['note'];
+        $newMeasurement->save();
+        $newMeasurementMeta = new MeasurementMeta;
+        $newMeasurementMeta->measurement_id = $newMeasurement->id;
+        $newMeasurementMeta->key = $request['key'];
+        $newMeasurementMeta->value = $request['value'];
+        $newMeasurementMeta->unit_id = $request['unit_id'];
     }
 }
