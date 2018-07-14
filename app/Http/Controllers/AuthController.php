@@ -10,6 +10,7 @@ use App\Measurement;
 use App\MeasurementMeta;
 use App\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\DB;
+use DateTime;
 
 class AuthController extends Controller
 {
@@ -160,11 +161,12 @@ class AuthController extends Controller
     public function addMeasurementsWithName() {
         $user = auth()->user();
         $request = request(['measurement_name', 'date_taken', 'note', 'key', 'value', 'unit_id']);
+        $mysqlDate = new DateTime($request['date_taken']);
         $subuser = Subuser::Where('user_id', $user['id'])->value('id');
         $newMeasurement = new Measurement;
         $newMeasurement->subuser_id = $subuser;
         $newMeasurement->name = $request['measurement_name'];
-        $newMeasurement->date_taken = $request['date_taken'];
+        $newMeasurement->date_taken = $mysqlDate->format('Y-m-d H:i:s');
         $newMeasurement->note = $request['note'];
         $newMeasurement->save();
         $newMeasurementMeta = new MeasurementMeta;
@@ -173,7 +175,9 @@ class AuthController extends Controller
         $newMeasurementMeta->value = $request['value'];
         $newMeasurementMeta->unit_id = $request['unit_id'];
         if($newMeasurementMeta->save()) {
-            return "Done";
+            return response()->json(['message' => 'Added successfully']);
         }
     }
+
+
 }
